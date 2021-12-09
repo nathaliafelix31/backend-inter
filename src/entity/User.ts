@@ -2,10 +2,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn, 
     Column
-} from 'typeorm';
+} from "typeorm";
 
 @Entity()
-    export class Pix{
+    export class User{
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -19,7 +19,7 @@ import {
     accountNumber: number;
 
     @Column()
-    accountDigt: number;
+    accountDigit: number;
 
     @Column()
     wallet: number;
