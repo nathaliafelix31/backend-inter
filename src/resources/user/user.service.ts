@@ -1,12 +1,12 @@
 import { getRepository } from "typeorm";
 import md5 from "crypto-js/md5";
 import { sign } from "jsonwebtoken";
-import authConfig from "../../../config/auth";
+import authConfig from "../../config/auth";
 
-import { User } from "../../../entity/User";
-import {UserSignIn} from "./user.sigin.dtos";
-import {UserSignUp} from "./user.signup.dtos";
-import AppError from "../../../shared/error/AppError";
+import { User } from "../../entity/User";
+import {UserSignIn} from "./dtos/user.sigin.dtos";
+import {UserSignUp} from "./dtos/user.signup.dtos";
+import AppError from "../../shared/error/AppError";
 
 
 export default class UserService {
@@ -40,7 +40,6 @@ export default class UserService {
         return {accessToken: token}
 
     }
-
 
     async signup(user: UserSignUp){
         const userRepository = getRepository(User);
