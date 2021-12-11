@@ -1,12 +1,14 @@
 import { getRepository } from "typeorm";
-import md5 from "crypto-js/md5";
 import { sign } from "jsonwebtoken";
-import authConfig from "../../config/auth";
+import md5 from "crypto-js/md5";
 
 import { User } from "../../entity/User";
+import AppError from "../../shared/error/AppError";
+import authConfig from "../../config/auth";
+
 import {UserSignIn} from "./dtos/user.sigin.dtos";
 import {UserSignUp} from "./dtos/user.signup.dtos";
-import AppError from "../../shared/error/AppError";
+
 
 
 export default class UserService {
@@ -34,7 +36,7 @@ export default class UserService {
             subject: existUser.id,
             expiresIn,
         });
-
+        // @ts-expect-error ignora
         delete existUser.password
 
         return {accessToken: token}
@@ -55,7 +57,7 @@ export default class UserService {
         const userData = {
             ...user,
             password: md5(user.password).toString(),
-            wallet: 5000,
+            wallet: 0,
             accountNumber: Math.floor(Math.random() * 999999),
             accountDigit: Math.floor(Math.random() * 99)
         }
@@ -85,7 +87,7 @@ export default class UserService {
             if(!currentUser){
                 throw new AppError("Usuário não encontrado",401);
             }
-
+            // @ts-expect-error ignora
             delete currentUser.password
 
             return currentUser;
